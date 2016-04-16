@@ -7,10 +7,11 @@
 //
 
 #import "ViewController.h"
-#import "PMElasticView.h"
+//#import "PMElasticView.h"
+#import "UIScrollView+ElasticRefresh.h"
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) NSArray *dataArray;
-@property (nonatomic, strong) PMElasticView *elasticView;
+//@property (nonatomic, strong) PMElasticView *elasticView;
 @property (nonatomic, strong) UITableView *mainTableView;
 
 @end
@@ -28,15 +29,15 @@
     [self.mainTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellID"];
     self.mainTableView.delegate = self;
     self.mainTableView.dataSource = self;
-    
-    self.elasticView = [[PMElasticView alloc] initWithFrame:self.view.bounds bindingScrollView:self.mainTableView];
-    [self.view addSubview:self.elasticView];
+    [self.mainTableView pm_RefreshHeader];
+//    self.elasticView = [[PMElasticView alloc] initWithFrame:self.view.bounds bindingScrollView:self.mainTableView];
+    [self.view addSubview:self.mainTableView];
 }
 
-- (void)restoreAction {
-
-    [self.elasticView endRefresh];
-}
+//- (void)restoreAction {
+//
+//    [self.elasticView endRefresh];
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     

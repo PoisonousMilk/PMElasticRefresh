@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		255097A41CC28586002B9B65 /* UIScrollView+ElasticRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 255097A31CC28586002B9B65 /* UIScrollView+ElasticRefresh.m */; };
 		25ED2FFF1CC243A3000A9F31 /* PMLineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 25ED2FFE1CC243A3000A9F31 /* PMLineLayer.m */; };
 		25FFF0361CBE9C5B00246C98 /* PMBallLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FFF0351CBE9C5B00246C98 /* PMBallLayer.m */; };
 		A1166B8E1CBE09680003BBFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A1166B8D1CBE09680003BBFA /* main.m */; };
@@ -38,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		255097A21CC28586002B9B65 /* UIScrollView+ElasticRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+ElasticRefresh.h"; sourceTree = "<group>"; };
+		255097A31CC28586002B9B65 /* UIScrollView+ElasticRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+ElasticRefresh.m"; sourceTree = "<group>"; };
+		255097A51CC286C0002B9B65 /* PMElasticRefresh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PMElasticRefresh.h; sourceTree = "<group>"; };
 		25ED2FFD1CC243A3000A9F31 /* PMLineLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMLineLayer.h; sourceTree = "<group>"; };
 		25ED2FFE1CC243A3000A9F31 /* PMLineLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMLineLayer.m; sourceTree = "<group>"; };
 		25FFF0341CBE9C5B00246C98 /* PMBallLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMBallLayer.h; sourceTree = "<group>"; };
@@ -159,6 +163,9 @@
 				25FFF0351CBE9C5B00246C98 /* PMBallLayer.m */,
 				25ED2FFD1CC243A3000A9F31 /* PMLineLayer.h */,
 				25ED2FFE1CC243A3000A9F31 /* PMLineLayer.m */,
+				255097A21CC28586002B9B65 /* UIScrollView+ElasticRefresh.h */,
+				255097A31CC28586002B9B65 /* UIScrollView+ElasticRefresh.m */,
+				255097A51CC286C0002B9B65 /* PMElasticRefresh.h */,
 			);
 			path = Classses;
 			sourceTree = "<group>";
@@ -295,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25ED2FFF1CC243A3000A9F31 /* PMLineLayer.m in Sources */,
+				255097A41CC28586002B9B65 /* UIScrollView+ElasticRefresh.m in Sources */,
 				A1166B941CBE09680003BBFA /* ViewController.m in Sources */,
 				A1166B911CBE09680003BBFA /* AppDelegate.m in Sources */,
 				A1166B8E1CBE09680003BBFA /* main.m in Sources */,

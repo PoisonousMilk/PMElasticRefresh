@@ -10,18 +10,17 @@
 
 @interface PMBallLayer ()
 
-@property (nonatomic, assign) CGFloat riseDistance;
+@property (nonatomic, assign) CGFloat animationHeight;
 @property (nonatomic, strong) UIColor *ballColor;
-
 
 @end
 
 @implementation PMBallLayer
 
-- (instancetype)initWithSize:(CGSize)ballSize fillColor:(UIColor *)fillColor riseDistance:(CGFloat)riseDistance {
+- (instancetype)initWithSize:(CGSize)ballSize fillColor:(UIColor *)fillColor animationHeight:(CGFloat)animationHeight {
     
     if (self = [super init]) {
-        self.riseDistance = riseDistance;
+        self.animationHeight = animationHeight;
         self.ballColor = fillColor;
         self.frame = CGRectMake(([UIScreen mainScreen].bounds.size.width - ballSize.width) * .5, 0, ballSize.width, ballSize.height);
         [self configShape];
@@ -31,7 +30,8 @@
 
 - (void)configShape {
     
-    CGPoint arcCenterPoint = CGPointMake(self.frame.size.width * .5, 250);
+    self.hidden = YES;
+    CGPoint arcCenterPoint = CGPointMake(self.frame.size.width * .5, self.animationHeight + self.bounds.size.height * .5);
     CGFloat arcRadius = self.frame.size.width * .5;
     CGFloat arcStartAngle = 0;
     CGFloat arcEndAngle =  M_PI * 2;
@@ -39,15 +39,14 @@
     self.path = bezierPath.CGPath;
     self.fillColor = self.ballColor.CGColor;
     self.strokeEnd = 1;
-    
-        
 }
 
 - (void)startAnimation {
     
+    self.hidden = NO;
     CABasicAnimation *moveupAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
     moveupAnimation.fromValue = [NSValue valueWithCGPoint:self.position];
-    moveupAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.position.x, self.position.y - 135)];
+    moveupAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.position.x, self.position.y - (self.animationHeight + self.bounds.size.height) * .5)];
     moveupAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     moveupAnimation.fillMode = kCAFillModeForwards;
     moveupAnimation.removedOnCompletion = NO;
@@ -62,7 +61,15 @@
     pulldownAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     pulldownAnimation.fillMode = kCAFillModeForwards;
     pulldownAnimation.removedOnCompletion = NO;
+    pulldownAnimation.delegate = self;
     [self addAnimation:pulldownAnimation forKey:@"pulldownAnimation"];
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+    
+    if (flag) {
+        self.hidden = YES;
+    }
 }
 
 @end

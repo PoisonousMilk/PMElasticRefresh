@@ -9,7 +9,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 @interface PMLineLayer : CAShapeLayer
-- (instancetype)initWithSize:(CGSize)ballSize StrokeColor:(UIColor *)strokeColor;
+- (instancetype)initWithSize:(CGSize)ballSize StrokeColor:(UIColor *)strokeColor animationHeight:(CGFloat)animationHeigt;
 - (void)startAnimation;
 - (void)endAnimation;
 @end

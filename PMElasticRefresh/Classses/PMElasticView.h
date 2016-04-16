@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface PMElasticView : UIView
-- (instancetype)initWithFrame:(CGRect)frame bindingScrollView:(UIScrollView *)bindingScrollView;
+- (instancetype)initWithBindingScrollView:(UIScrollView *)bindingScrollView;
 
 - (void)endRefresh;
 

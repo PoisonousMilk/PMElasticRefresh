@@ -11,16 +11,18 @@
 @interface PMLineLayer ()
 
 @property (nonatomic, strong) UIColor *arcStrokeColor;
+@property (nonatomic, assign) CGFloat animationHeight;
 
 @end
 
 @implementation PMLineLayer
 
-- (instancetype)initWithSize:(CGSize)ballSize StrokeColor:(UIColor *)strokeColor {
+- (instancetype)initWithSize:(CGSize)ballSize StrokeColor:(UIColor *)strokeColor animationHeight:(CGFloat)animationHeigt{
     
     if (self = [super init]) {
+        self.animationHeight = animationHeigt;
         self.arcStrokeColor = strokeColor;
-        self.frame = CGRectMake(([UIScreen mainScreen].bounds.size.width - ballSize.width) * .5, 85, ballSize.width, ballSize.height);
+        self.frame = CGRectMake(([UIScreen mainScreen].bounds.size.width - ballSize.width) * .5, (self.animationHeight - ballSize.height) * .5 , ballSize.width, ballSize.height);
         [self configShape];
 
     }
