@@ -62,7 +62,6 @@
     if ([keyPath isEqualToString:CONTENTOFFSET_KEYPATH] && [object isKindOfClass:[UIScrollView class]]) {
         self.offSet_Y = self.bindingScrollView.contentOffset.y + NavigationHeight;
         self.frame = CGRectMake(0, self.offSet_Y >=0 ? 0 : self.offSet_Y, self.bindingScrollView.bounds.size.width, self.offSet_Y >=0 ? 0 : ABS(self.offSet_Y));
-        NSLog(@"%f",self.offSet_Y);
         if (self.bindingScrollView.dragging || self.offSet_Y > AnimationDISTANCE) {
             self.elasticShaperLayer.path = [self calculateAnimaPathWithOriginY:-self.offSet_Y];
         }
@@ -139,7 +138,6 @@
     CGPoint topLeftPoint = CGPointMake(0,0);
     CGPoint bottomLeftPoint = CGPointMake(0, self.offSet_Y <= AnimationDISTANCE ? 100 : originY);
     CGPoint controlPoint = CGPointMake(self.bindingScrollView.bounds.size.width * .5, originY);
-    NSLog(@"controlPoint %@",NSStringFromCGPoint(controlPoint));
     CGPoint bottomRightPoint = CGPointMake(self.bindingScrollView.bounds.size.width, self.offSet_Y <= AnimationDISTANCE ? 100 : originY);
     CGPoint topRightPoint = CGPointMake(self.bindingScrollView.bounds.size.width, 0);
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];

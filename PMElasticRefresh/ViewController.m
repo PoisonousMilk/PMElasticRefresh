@@ -7,8 +7,7 @@
 //
 
 #import "ViewController.h"
-//#import "PMElasticView.h"
-#import "UIScrollView+ElasticRefresh.h"
+#import "PMElasticRefresh.h"
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) NSArray *dataArray;
 //@property (nonatomic, strong) PMElasticView *elasticView;
