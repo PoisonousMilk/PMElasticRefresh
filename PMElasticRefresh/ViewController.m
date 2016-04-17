@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    self.view.backgroundColor = [UIColor colorWithRed:0.421593 green:0.657718 blue:0.972549 alpha:1];
-    self.view.backgroundColor = [UIColor redColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"PMElasticRefresh";
     self.dataArray = @[@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"恢复" style:UIBarButtonItemStylePlain target:self action:@selector(restoreAction)];
@@ -34,10 +34,10 @@
     [self.view addSubview:self.mainTableView];
 }
 
-//- (void)restoreAction {
-//
-//    [self.elasticView endRefresh];
-//}
+- (void)restoreAction {
+
+    [self.mainTableView endRefresh];
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     

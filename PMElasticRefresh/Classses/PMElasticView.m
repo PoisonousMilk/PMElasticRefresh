@@ -12,20 +12,16 @@
 #define CONTENTOFFSET_KEYPATH @"contentOffset"
 #define AnimationDISTANCE -100
 #define NavigationHeight 64
-//typedef enum : NSUInteger {
-//    AYLodingStatus,
-//    AYPullDownStatus
-//} AYRefreshStatus;
 
 @interface PMElasticView ()
 
 @property (nonatomic, strong) UIScrollView *bindingScrollView;
-//@property (nonatomic, assign) CGFloat offset;
 @property (nonatomic, assign) CGFloat offSet_Y;
-//@property (nonatomic, assign) AYRefreshStatus refreshStatus;
+@property (nonatomic, assign) BOOL endAniamtion;
 @property (nonatomic, strong) CAShapeLayer *elasticShaperLayer;
 @property (nonatomic, strong) PMBallLayer *ballLayer;
 @property (nonatomic, strong) PMLineLayer *lineLayer;
+
 @end
 
 @implementation PMElasticView
@@ -40,7 +36,7 @@
     if (self = [super initWithFrame:CGRectZero]) {
         self.backgroundColor = [UIColor whiteColor];
         self.bindingScrollView = bindingScrollView;
-        self.bindingScrollView.backgroundColor = [UIColor clearColor];
+//        self.bindingScrollView.backgroundColor = [UIColor clearColor];
         [self configSubViews];
     }
     return self;
@@ -50,9 +46,8 @@
     
     self.elasticShaperLayer = [[CAShapeLayer alloc] initWithLayer:self.layer];
     self.elasticShaperLayer.path = [self calculateAnimaPathWithOriginY:0];
-    self.elasticShaperLayer.fillColor = [UIColor greenColor].CGColor;
+    self.elasticShaperLayer.fillColor = [UIColor colorWithRed:0.0431 green:0.7569 blue:0.9412 alpha:1.0].CGColor;
     [self.layer addSublayer:self.elasticShaperLayer];
-//    [self addSubview:self.bindingScrollView];
     [self.bindingScrollView addObserver:self forKeyPath:CONTENTOFFSET_KEYPATH options:NSKeyValueObservingOptionInitial context:nil];
     
     self.ballLayer = [[PMBallLayer alloc] initWithSize:CGSizeMake(60, 60) fillColor:[UIColor whiteColor] animationHeight:ABS(AnimationDISTANCE)];
@@ -60,7 +55,6 @@
     
     self.lineLayer = [[PMLineLayer alloc] initWithSize:CGSizeMake(60, 60) StrokeColor:[UIColor whiteColor] animationHeight:ABS(AnimationDISTANCE)];
     [self.elasticShaperLayer addSublayer:self.lineLayer];
-
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
@@ -72,6 +66,9 @@
         if (self.bindingScrollView.dragging || self.offSet_Y > AnimationDISTANCE) {
             self.elasticShaperLayer.path = [self calculateAnimaPathWithOriginY:-self.offSet_Y];
         }
+        if (self.offSet_Y == 0) {
+            self.endAniamtion = NO;
+        }
         [self changeScrollViewProperty];
     }
 }
@@ -81,14 +78,18 @@
     if (self.offSet_Y <= AnimationDISTANCE) {
 //        self.bindingScrollView.alpha = 0;
 //  松手刷新状态
-        if (!self.bindingScrollView.dragging) {
+        if (!self.bindingScrollView.dragging && !self.endAniamtion) {
             [self.bindingScrollView setContentOffset:CGPointMake(0, AnimationDISTANCE - NavigationHeight) animated:NO];
-            [self elasticLayerAnimation];
+//            if (self.refreshStatus != AYEndLodingSatus) {
+                [self elasticLayerAnimation];
+//            }
         } else {
-//            self.bindingScrollView.alpha = ABS(1 + ((self.offSet_Y + 64) / AnimationDISTANCE));
+            
         }
     } else {
-        self.bindingScrollView.alpha = 1;
+//        self.bindingScrollView.alpha = 1;
+        self.bindingScrollView.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:ABS(1 - self.offSet_Y/AnimationDISTANCE)];
+//        [self endRefresh];
     }
 }
 
@@ -124,7 +125,10 @@
 }
 
 - (void)endRefresh {
-    
+
+    self.endAniamtion = YES;
+    self.elasticShaperLayer.path = [self calculateAnimaPathWithOriginY:ABS(AnimationDISTANCE)];
+    [self.elasticShaperLayer removeAllAnimations];
     [self.bindingScrollView setContentOffset:CGPointMake(0, -NavigationHeight) animated:YES];
     [self.ballLayer endAnimation];
     [self.lineLayer endAnimation];
@@ -135,7 +139,7 @@
     CGPoint topLeftPoint = CGPointMake(0,0);
     CGPoint bottomLeftPoint = CGPointMake(0, self.offSet_Y <= AnimationDISTANCE ? 100 : originY);
     CGPoint controlPoint = CGPointMake(self.bindingScrollView.bounds.size.width * .5, originY);
-    NSLog(@"controlPoing %@",NSStringFromCGPoint(controlPoint));
+    NSLog(@"controlPoint %@",NSStringFromCGPoint(controlPoint));
     CGPoint bottomRightPoint = CGPointMake(self.bindingScrollView.bounds.size.width, self.offSet_Y <= AnimationDISTANCE ? 100 : originY);
     CGPoint topRightPoint = CGPointMake(self.bindingScrollView.bounds.size.width, 0);
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];

@@ -20,6 +20,11 @@ static const void *PMElasticViewKey = &PMElasticViewKey;
     [self addSubview:elasticView];
 }
 
+- (void)endRefresh {
+    
+    [self.elasticView endRefresh];
+}
+
 - (PMElasticView *)elasticView {
     
     return objc_getAssociatedObject(self, PMElasticViewKey);

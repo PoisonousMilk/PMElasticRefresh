@@ -56,7 +56,7 @@
 - (void)endAnimation {
     
     CABasicAnimation *pulldownAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
-    pulldownAnimation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.position.x, self.position.y - 135)];
+    pulldownAnimation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.position.x, self.position.y - (self.animationHeight + self.bounds.size.height) * .5)];
     pulldownAnimation.toValue = [NSValue valueWithCGPoint:self.position];
     pulldownAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     pulldownAnimation.fillMode = kCAFillModeForwards;

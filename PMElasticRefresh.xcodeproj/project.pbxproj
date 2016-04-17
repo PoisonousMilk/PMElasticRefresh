@@ -157,6 +157,7 @@
 		A1166BBF1CBE09A70003BBFA /* Classses */ = {
 			isa = PBXGroup;
 			children = (
+				255097A51CC286C0002B9B65 /* PMElasticRefresh.h */,
 				A1166BC01CBE09C20003BBFA /* PMElasticView.h */,
 				A1166BC11CBE09C20003BBFA /* PMElasticView.m */,
 				25FFF0341CBE9C5B00246C98 /* PMBallLayer.h */,
@@ -165,7 +166,6 @@
 				25ED2FFE1CC243A3000A9F31 /* PMLineLayer.m */,
 				255097A21CC28586002B9B65 /* UIScrollView+ElasticRefresh.h */,
 				255097A31CC28586002B9B65 /* UIScrollView+ElasticRefresh.m */,
-				255097A51CC286C0002B9B65 /* PMElasticRefresh.h */,
 			);
 			path = Classses;
 			sourceTree = "<group>";

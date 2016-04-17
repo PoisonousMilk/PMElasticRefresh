@@ -12,5 +12,5 @@
 
 @property (nonatomic, strong) PMElasticView *elasticView;
 - (void)pm_RefreshHeader;
-
+- (void)endRefresh;
 @end

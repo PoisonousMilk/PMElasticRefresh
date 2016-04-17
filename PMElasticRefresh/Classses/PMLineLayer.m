@@ -17,12 +17,19 @@
 
 @implementation PMLineLayer
 
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (instancetype)initWithSize:(CGSize)ballSize StrokeColor:(UIColor *)strokeColor animationHeight:(CGFloat)animationHeigt{
     
     if (self = [super init]) {
         self.animationHeight = animationHeigt;
         self.arcStrokeColor = strokeColor;
         self.frame = CGRectMake(([UIScreen mainScreen].bounds.size.width - ballSize.width) * .5, (self.animationHeight - ballSize.height) * .5 , ballSize.width, ballSize.height);
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startAnimation) name:UIApplicationWillEnterForegroundNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endAnimation) name:UIApplicationDidEnterBackgroundNotification object:nil];
         [self configShape];
 
     }
@@ -57,7 +64,7 @@
     rotateAnimation.duration = 1;
     rotateAnimation.fillMode = kCAFillModeForwards;
     rotateAnimation.removedOnCompletion = NO;
-    rotateAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    rotateAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     rotateAnimation.repeatCount = HUGE;
     [self addAnimation:rotateAnimation forKey:@"rotateAnimation"];
     [self strokeEndAnimation];
@@ -73,9 +80,9 @@
     
     CABasicAnimation *strokeEndAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
     strokeEndAnimation.fromValue = @(0);
-    strokeEndAnimation.toValue = @(1);
-    strokeEndAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-    strokeEndAnimation.duration = 1;
+    strokeEndAnimation.toValue = @(.95);
+    strokeEndAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    strokeEndAnimation.duration = 2;
     strokeEndAnimation.repeatCount = 1;
     strokeEndAnimation.fillMode = kCAFillModeForwards;
     strokeEndAnimation.removedOnCompletion = NO;
@@ -87,9 +94,9 @@
     
     CABasicAnimation *strokeStartAnimation = [CABasicAnimation animationWithKeyPath:@"strokeStart"];
     strokeStartAnimation.fromValue = @(0);
-    strokeStartAnimation.toValue = @(1);
-    strokeStartAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-    strokeStartAnimation.duration = 1;
+    strokeStartAnimation.toValue = @(.95);
+    strokeStartAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    strokeStartAnimation.duration = 2;
     strokeStartAnimation.repeatCount = 1;
     strokeStartAnimation.fillMode = kCAFillModeForwards;
     strokeStartAnimation.removedOnCompletion = NO;
