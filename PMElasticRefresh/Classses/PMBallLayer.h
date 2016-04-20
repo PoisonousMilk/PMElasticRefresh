@@ -10,8 +10,8 @@
 #import <UIKit/UIKit.h>
 @interface PMBallLayer : CAShapeLayer
 
-
 - (instancetype)initWithSize:(CGSize)ballSize fillColor:(UIColor *)fillColor animationHeight:(CGFloat)animationHeight;
 - (void)startAnimation;
 - (void)endAnimation;
+
 @end

@@ -94,6 +94,7 @@
 
 - (void)elasticLayerAnimation {
     
+    self.elasticShaperLayer.path = [self calculateAnimaPathWithOriginY:ABS(AnimationDISTANCE)];
     NSArray *pathValues = @[
                            (__bridge id)[self calculateAnimaPathWithOriginY:ABS(self.offSet_Y)],
                            (__bridge id)[self calculateAnimaPathWithOriginY:ABS(AnimationDISTANCE) * 0.7],
@@ -125,12 +126,12 @@
 
 - (void)endRefresh {
 
-    self.endAniamtion = YES;
-    self.elasticShaperLayer.path = [self calculateAnimaPathWithOriginY:ABS(AnimationDISTANCE)];
+    self.endAniamtion = self.offSet_Y == 0 ? NO : YES;
+//    self.elasticShaperLayer.path = [self calculateAnimaPathWithOriginY:ABS(AnimationDISTANCE)];
     [self.elasticShaperLayer removeAllAnimations];
-    [self.bindingScrollView setContentOffset:CGPointMake(0, -NavigationHeight) animated:YES];
     [self.ballLayer endAnimation];
     [self.lineLayer endAnimation];
+    [self.bindingScrollView setContentOffset:CGPointMake(0, -NavigationHeight) animated:YES];
 }
 
 - (CGPathRef)calculateAnimaPathWithOriginY:(CGFloat)originY {

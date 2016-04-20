@@ -237,7 +237,6 @@
 				TargetAttributes = {
 					A1166B881CBE09680003BBFA = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = J2ATC22AZM;
 					};
 					A1166BA11CBE09680003BBFA = {
 						CreatedOnToolsVersion = 7.3;
