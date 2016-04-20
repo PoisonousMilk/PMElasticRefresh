@@ -61,15 +61,7 @@
     pulldownAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     pulldownAnimation.fillMode = kCAFillModeForwards;
     pulldownAnimation.removedOnCompletion = NO;
-    pulldownAnimation.delegate = self;
     [self addAnimation:pulldownAnimation forKey:@"pulldownAnimation"];
-}
-
-- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
-    
-    if (flag) {
-        self.hidden = YES;
-    }
 }
 
 @end

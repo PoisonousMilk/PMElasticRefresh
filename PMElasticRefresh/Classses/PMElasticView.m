@@ -17,7 +17,7 @@
 
 @property (nonatomic, strong) UIScrollView *bindingScrollView;
 @property (nonatomic, assign) CGFloat offSet_Y;
-@property (nonatomic, assign) BOOL endAniamtion;
+@property (nonatomic, assign, getter = isEndAnimation) BOOL endAniamtion;
 @property (nonatomic, strong) CAShapeLayer *elasticShaperLayer;
 @property (nonatomic, strong) PMBallLayer *ballLayer;
 @property (nonatomic, strong) PMLineLayer *lineLayer;
@@ -75,25 +75,23 @@
 - (void)changeScrollViewProperty {
     
     if (self.offSet_Y <= AnimationDISTANCE) {
-//        self.bindingScrollView.alpha = 0;
-//  松手刷新状态
         if (!self.bindingScrollView.dragging && !self.endAniamtion) {
             [self.bindingScrollView setContentOffset:CGPointMake(0, AnimationDISTANCE - NavigationHeight) animated:NO];
-//            if (self.refreshStatus != AYEndLodingSatus) {
-                [self elasticLayerAnimation];
-//            }
-        } else {
-            
+            [self elasticLayerAnimation];
         }
     } else {
-//        self.bindingScrollView.alpha = 1;
-        self.bindingScrollView.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:ABS(1 - self.offSet_Y/AnimationDISTANCE)];
-//        [self endRefresh];
+        self.ballLayer.hidden = YES;
+        self.lineLayer.hidden = YES;
+        [self.elasticShaperLayer removeAllAnimations];
+        [self.ballLayer endAnimation];
+        [self.lineLayer endAnimation];
     }
 }
 
 - (void)elasticLayerAnimation {
     
+    self.ballLayer.hidden = NO;
+    self.lineLayer.hidden = NO;
     self.elasticShaperLayer.path = [self calculateAnimaPathWithOriginY:ABS(AnimationDISTANCE)];
     NSArray *pathValues = @[
                            (__bridge id)[self calculateAnimaPathWithOriginY:ABS(self.offSet_Y)],
@@ -111,7 +109,6 @@
     elasticAnimation.removedOnCompletion = NO;
     elasticAnimation.delegate = self;
     [self.elasticShaperLayer addAnimation:elasticAnimation forKey:@"elasticAnimation"];
-    
     [self.ballLayer startAnimation];
     [self.lineLayer startAnimation];
 }
@@ -125,9 +122,8 @@
 }
 
 - (void)endRefresh {
-
+    
     self.endAniamtion = self.offSet_Y == 0 ? NO : YES;
-//    self.elasticShaperLayer.path = [self calculateAnimaPathWithOriginY:ABS(AnimationDISTANCE)];
     [self.elasticShaperLayer removeAllAnimations];
     [self.ballLayer endAnimation];
     [self.lineLayer endAnimation];
