@@ -28,8 +28,11 @@
     [self.mainTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellID"];
     self.mainTableView.delegate = self;
     self.mainTableView.dataSource = self;
-    [self.mainTableView pm_RefreshHeader];
-//    self.elasticView = [[PMElasticView alloc] initWithFrame:self.view.bounds bindingScrollView:self.mainTableView];
+//    [self.mainTableView pm_RefreshHeader];
+    [self.mainTableView pm_RefreshHeaderWithBlock:^{
+       
+        NSLog(@"refreshBlock");
+    }];
     [self.view addSubview:self.mainTableView];
 }
 
@@ -49,7 +52,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
     }
-//    cell.textLabel.text = self.dataArray[indexPath.row];
+    cell.textLabel.text = self.dataArray[indexPath.row];
     return cell;
 }
 

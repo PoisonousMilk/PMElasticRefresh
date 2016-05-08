@@ -74,9 +74,12 @@
 
 - (void)changeScrollViewProperty {
     
-    if (self.offSet_Y <= AnimationDISTANCE) {
+    if (self.offSet_Y < AnimationDISTANCE) {
         if (!self.bindingScrollView.dragging && !self.endAniamtion) {
             [self.bindingScrollView setContentOffset:CGPointMake(0, AnimationDISTANCE - NavigationHeight) animated:NO];
+            if (self.refreshBlock) {
+                self.refreshBlock();
+            }
             [self elasticLayerAnimation];
         }
     } else {

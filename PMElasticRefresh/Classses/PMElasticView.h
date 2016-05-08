@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^PMRefreshBlock)(void);
+
 @interface PMElasticView : UIView
 - (instancetype)initWithBindingScrollView:(UIScrollView *)bindingScrollView;
 
 - (void)endRefresh;
-
+@property (nonatomic, copy) PMRefreshBlock refreshBlock;
 @end

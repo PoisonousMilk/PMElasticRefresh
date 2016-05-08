@@ -20,6 +20,14 @@ static const void *PMElasticViewKey = &PMElasticViewKey;
     [self addSubview:elasticView];
 }
 
+- (void)pm_RefreshHeaderWithBlock:(PMRefreshBlock)refreshBlock {
+    
+    PMElasticView *elasticView = [[PMElasticView alloc] initWithBindingScrollView:self];
+    elasticView.refreshBlock = refreshBlock;
+    self.elasticView = elasticView;
+    [self addSubview:elasticView];
+}
+
 - (void)endRefresh {
     
     [self.elasticView endRefresh];

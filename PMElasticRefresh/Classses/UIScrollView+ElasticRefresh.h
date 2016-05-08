@@ -11,6 +11,7 @@
 @interface UIScrollView (ElasticRefresh)
 
 @property (nonatomic, strong) PMElasticView *elasticView;
+- (void)pm_RefreshHeaderWithBlock:(PMRefreshBlock)refreshBlock;
 - (void)pm_RefreshHeader;
 - (void)endRefresh;
 @end
