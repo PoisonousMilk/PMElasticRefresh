@@ -19,7 +19,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.view.backgroundColor = [UIColor colorWithRed:0.421593 green:0.657718 blue:0.972549 alpha:1];
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"PMElasticRefresh";
     self.dataArray = @[@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源",@"数据源"];
@@ -28,7 +27,6 @@
     [self.mainTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellID"];
     self.mainTableView.delegate = self;
     self.mainTableView.dataSource = self;
-//    [self.mainTableView pm_RefreshHeader];
     [self.mainTableView pm_RefreshHeaderWithBlock:^{
        
         NSLog(@"refreshBlock");

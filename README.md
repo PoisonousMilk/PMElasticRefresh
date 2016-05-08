@@ -18,7 +18,10 @@ Import header file:
 Inital and use `pm_RefreshHeader` to add refresh header
 ```objc
 self.mainTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-[self.mainTableView pm_RefreshHeader];
+[self.mainTableView pm_RefreshHeaderWithBlock:^{
+       
+        NSLog(@"refreshBlock");
+    }];
 [self.view addSubview:self.mainTableView];
 ```
 
@@ -28,6 +31,8 @@ End refresh
 ```
 
 # Changelog
+
+v 0.0.2 add Block to deal Refresh
 
 v 0.0.1 first commit
 
@@ -50,7 +55,10 @@ PMElasticRefresh is provided under the MIT license. See LICENSE file for details
 初始化并调用`pm_RefreshHeader`来加上刷新头
 ```objc
 self.mainTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-[self.mainTableView pm_RefreshHeader];
+[self.mainTableView pm_RefreshHeaderWithBlock:^{
+       
+        NSLog(@"refreshBlock");
+    }];
 [self.view addSubview:self.mainTableView];
 ```
 
@@ -60,6 +68,8 @@ self.mainTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:U
 ```
 
 # 版本更新
+
+v 0.0.2 加入Block进行回调刷新
 
 v 0.0.1 首次提交
 

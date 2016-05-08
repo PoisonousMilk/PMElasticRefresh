@@ -13,13 +13,6 @@ static const void *PMElasticViewKey = &PMElasticViewKey;
 
 @implementation UIScrollView (ElasticRefresh)
 
-- (void)pm_RefreshHeader {
-    
-    PMElasticView *elasticView = [[PMElasticView alloc] initWithBindingScrollView:self];
-    self.elasticView = elasticView;
-    [self addSubview:elasticView];
-}
-
 - (void)pm_RefreshHeaderWithBlock:(PMRefreshBlock)refreshBlock {
     
     PMElasticView *elasticView = [[PMElasticView alloc] initWithBindingScrollView:self];

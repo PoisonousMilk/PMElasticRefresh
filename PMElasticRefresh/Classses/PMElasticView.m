@@ -58,10 +58,11 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+
     
     if ([keyPath isEqualToString:CONTENTOFFSET_KEYPATH] && [object isKindOfClass:[UIScrollView class]]) {
         self.offSet_Y = self.bindingScrollView.contentOffset.y + NavigationHeight;
-        self.frame = CGRectMake(0, self.offSet_Y >=0 ? 0 : self.offSet_Y, self.bindingScrollView.bounds.size.width, self.offSet_Y >=0 ? 0 : ABS(self.offSet_Y));
+        self.frame = CGRectMake(0, self.offSet_Y >= 0 ? 0 : self.offSet_Y, self.bindingScrollView.bounds.size.width, self.offSet_Y >=0 ? 0 : ABS(self.offSet_Y));
         if (self.bindingScrollView.dragging || self.offSet_Y > AnimationDISTANCE) {
             self.elasticShaperLayer.path = [self calculateAnimaPathWithOriginY:-self.offSet_Y];
         }
@@ -74,7 +75,7 @@
 
 - (void)changeScrollViewProperty {
     
-    if (self.offSet_Y < AnimationDISTANCE) {
+    if (self.offSet_Y <= AnimationDISTANCE) {
         if (!self.bindingScrollView.dragging && !self.endAniamtion) {
             [self.bindingScrollView setContentOffset:CGPointMake(0, AnimationDISTANCE - NavigationHeight) animated:NO];
             if (self.refreshBlock) {
