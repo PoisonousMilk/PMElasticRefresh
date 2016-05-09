@@ -7,6 +7,8 @@
 
 Use elastic animation to make refresh more funny.
 
+![动画效果](http://7xrofo.com1.z0.glb.clouddn.com/2016-05-08%2017_11_56.gif)
+
 # Installtion
 
 Download and run the Demo. When we make the `PMElasticRefresh` move perfected, We will support [CocoaPods](https://cocoapods.org/). 
